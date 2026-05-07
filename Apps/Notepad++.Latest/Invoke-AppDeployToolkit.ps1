@@ -372,19 +372,14 @@ function Install-ADTDeployment
 		# measuring execution time is really hip these days.
 		$stop_watch = [Diagnostics.Stopwatch]::StartNew()
 		
-		# Create Authorization header -- GitHub API requires User-Agent, and to go above the default of 60 requests per hour, use a Authorization Token from our Endpoint GitHub account
-		$headers = @{
-			"User-Agent"    = "PowerShell"
-			"Authorization" = "token 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"
-		}
-		
+
 		## Direct Download link
 		$DownloadURI = 'https://api.github.com/repos/notepad-plus-plus/notepad-plus-plus/releases/latest'
 		
 		Write-ADTLogEntry -Message "Download URI [$DownloadURI]"
 		
 		
-		$EvergreenApp = Invoke-WebRequest -Uri $DownloadURI -Headers $headers -UseBasicParsing | ConvertFrom-Json
+		$EvergreenApp = Invoke-WebRequest -Uri $DownloadURI -UseBasicParsing | ConvertFrom-Json
 		
 		## Filter for
 		$EvergreenAppPackage = "x64.exe"
@@ -410,7 +405,7 @@ function Install-ADTDeployment
 		Write-ADTLogEntry -Message "Installer Path [$installerPath]"
 		
 		## Save the file to the installerpath
-		Invoke-WebRequest -Uri $directDownload -Headers $headers -OutFile $installerPath -UseBasicParsing
+		Invoke-WebRequest -Uri $directDownload -OutFile $installerPath -UseBasicParsing
 		
 		# Stop measuring execution time
 		$stop_watch.Stop()
