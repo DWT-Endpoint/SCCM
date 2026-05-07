@@ -1,0 +1,3 @@
+"Invoke-AppDeployToolkit.exe" -DeploymentType "Install" -DeployMode "Auto"
+"Invoke-AppDeployToolkit.exe" -DeploymentType "UnInstall" -DeployMode "Auto"
+"Invoke-AppDeployToolkit.exe" -DeploymentType "Repair" -DeployMode "Auto"
